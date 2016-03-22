@@ -1,31 +1,31 @@
 require "kemal"
 require "./database/*"
 
-get "/" do
-  render "src/views/index.ecr"
-end
+module TrafficSign
+  get "/" do |env|
+    render "src/views/index.ecr", "src/views/layouts/application.ecr"
+  end
 
-get "/project/show" do
-  render "src/views/index.ecr"
-end
+  get "/project/show" do
+    render "src/views/index.ecr", "src/views/layouts/application.ecr"
+  end
 
-get "/project/new" do
-  render "src/views/index.ecr"
-end
+  get "/project/new" do
+    render "src/views/new.ecr", "src/views/layouts/application.ecr"
+  end
 
-get "/project/create" do
-end
+  post "/project/create" do
+  end
 
-get "/project/edit" do
-  render "src/views/index.ecr"
-end
+  get "/project/edit" do
+    render "src/views/edit.ecr", "src/views/layouts/application.ecr"
+  end
 
-get "/project/update" do
+  patch "/project/update" do
+  end
 
-end
-
-get "/project/destroy" do
-
+  delete "/project/destroy" do
+  end
 end
 
 Kemal.run
