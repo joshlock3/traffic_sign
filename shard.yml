@@ -11,9 +11,8 @@ dependencies:
     github: sdogruyol/kemal
     branch: master
 
-  kemal-pg:
-    github: sdogruyol/kemal-pg
-
+  sqlite3:
+    github: manastech/crystal-sqlite3
 
 # (behind_schedule, on_schedule, ahead_schedule)
 # (Show ALL) Index project, team name, set due date, expected due date, status, Completed?
