@@ -1,0 +1,24 @@
+name: traffic_sign
+version: 0.1.0
+
+authors:
+  - Joshua Lockhart <jlockhart@ncsasports.org>
+
+license: MIT
+
+dependencies:
+  kemal:
+    github: sdogruyol/kemal
+    branch: master
+
+  kemal-pg:
+    github: sdogruyol/kemal-pg
+
+
+# (behind_schedule, on_schedule, ahead_schedule)
+# (Show ALL) Index project, team name, set due date, expected due date, status, Completed?
+# CRUD project, team name, due date, status
+
+
+#Select team names from db (dropdown)
+#Select status from db (dropdown)
