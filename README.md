@@ -1,6 +1,8 @@
 # traffic_sign
 
-TODO: Write a description here
+Robin will start with Reactjs as the initial framework
+
+on the add page, be able to create new projects all via js requests
 
 ## Installation
 
