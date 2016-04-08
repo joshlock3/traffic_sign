@@ -28,21 +28,28 @@ module Database::Connection
       Database::Connection.connect("CREATE TABLE projects (id INTEGER PRIMARY KEY ASC, name, due_date, adjusted_due_date, status_id, completed);")
     end
 
-    def self.create(name = "")
+    def self.create(name = "", due_date = "", adjusted_due_date = "", status_id = 0, completed = 0)
       check = find(name: name)
 
       unless check.size > 0
-        statement = INSERT + MODEL + " (name) VALUES('#{name}');"
+        statement = INSERT + MODEL + " (name, due_date, adjusted_due_date, status_id, completed) VALUES('#{name}', '#{due_date}', '#{adjusted_due_date}', '#{status_id}', '#{completed}');"
         Database::Connection.connect(statement)
       else
         p DUPLICATE
       end
     end
 
-    def self.find(name = "", id = 0)
-      statement = FIND + MODEL +  " WHERE ;"
+    def self.find_by(name = "", id = 0)
+      where = case
+      when id != 0
+        "id = #{id}"
+      when name != ""
+       "name = #{name}"
+      end
+      statement = FIND + MODEL +  " WHERE #{where};"
       Database::Connection.connect(statement)
     end
+
 
     def self.destroy
       statement = DESTROY + MODEL +  " WHERE name = '#{name}';"

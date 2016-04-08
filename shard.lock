@@ -2,7 +2,7 @@ version: 1.0
 shards:
   kemal:
     github: sdogruyol/kemal
-    commit: 7b1bc43a412bc0e2396ac3ff15b60f4686ee678d
+    commit: de98236fc4fa3f52e803cd79261808cba3834ab5
 
   kilt:
     github: jeromegn/kilt
@@ -14,7 +14,7 @@ shards:
 
   slang:
     github: jeromegn/slang
-    version: 1.1.0
+    version: 1.2.0
 
   sqlite3:
     github: manastech/crystal-sqlite3
