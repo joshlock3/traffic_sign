@@ -234,7 +234,6 @@
         if (!project.team_id) {
             project.errors.team_id = ["Please enter your new team"];
         }
-        debugger;
         setState(
             Object.keys(project.errors).length === 0 ? {
                 newProject: Object.assign({}, PROJECT_TEMPLATE),
