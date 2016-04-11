@@ -14,9 +14,11 @@ dependencies:
   sqlite3:
     github: manastech/crystal-sqlite3
 
-  slang:
-    github: jeromegn/slang
+  kemal-pg:
+    github: sdogruyol/kemal-pg
 
+  pg:
+    github: will/crystal-pg
 # (behind_schedule, on_schedule, ahead_schedule)
 # (Show ALL) Index project, team name, set due date, expected due date, status, Completed?
 # CRUD project, team name, due date, status

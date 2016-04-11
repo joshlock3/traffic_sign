@@ -2,19 +2,27 @@ version: 1.0
 shards:
   kemal:
     github: sdogruyol/kemal
-    commit: de98236fc4fa3f52e803cd79261808cba3834ab5
+    commit: 65d0af5b5f953c9c263d0e4c657517c4d64567ce
+
+  kemal-pg:
+    github: sdogruyol/kemal-pg
+    version: 0.4.0
 
   kilt:
     github: jeromegn/kilt
     version: 0.3.3
 
+  pg:
+    github: will/crystal-pg
+    commit: cafe38b532b859122337455aa09afeac4f8deeaa
+
+  pool:
+    github: ysbaddaden/pool
+    commit: ed6af70886e76de84f440b6efe9bc6f49ab24fbe
+
   radix:
     github: luislavena/radix
     version: 0.1.1
-
-  slang:
-    github: jeromegn/slang
-    version: 1.2.0
 
   sqlite3:
     github: manastech/crystal-sqlite3

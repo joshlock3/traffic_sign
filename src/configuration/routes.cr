@@ -2,7 +2,7 @@ module Routes
   ######   ROOT/SINGLE PAGE   ######
 
   get "/" do
-    render "src/views/index.ecr", "src/views/layouts/application.ecr"
+    render "src/views/index.html.ecr", "src/views/layouts/application.html.ecr"
   end
 
   ######   PROJECTS   ######
