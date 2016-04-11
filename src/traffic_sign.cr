@@ -4,32 +4,16 @@ require "./database/*"
 
 module TrafficSign
   get "/" do
-    render "src/views/index.slang", "src/views/layouts/application.ecr"
+    render "src/views/index.ecr", "src/views/layouts/application.ecr"
   end
 
-  get "/project/show" do
-    render "src/views/index.slang", "src/views/layouts/application.ecr"
+  post "/project/create" do |params|
   end
 
-  get "/project/new" do
-    render "src/views/new.html.ecr", "src/views/layouts/application.ecr"
+  patch "/project/update" do |params|
   end
 
-  post "/project/create" do
-  end
-
-  get "/project/edit" do
-    render "src/views/edit.slang", "src/views/layouts/application.ecr"
-  end
-
-  get "/project/click_counter" do
-    render "src/views/click_counter.html.ecr"
-  end
-
-  patch "/project/update" do
-  end
-
-  delete "/project/destroy" do
+  delete "/project/destroy" do |params|
   end
 end
 
