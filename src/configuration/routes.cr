@@ -1,3 +1,4 @@
+require "json"
 module Routes
   ######   ROOT/SINGLE PAGE   ######
 
@@ -12,11 +13,13 @@ module Routes
   ######   PROJECTS   ######
 
   get "/project/all" do |env|
-    Project.all
+    env.response.content_type = "application/json"
+    [{name: "Something", team_id: 1}, {name: "Something", team_id: 1}].to_json
   end
 
   get "/project/team" do |env|
-    Project.all
+    env.response.content_type = "application/json"
+    [{name: "Something", team_id: 1}, {name: "Something", team_id: 1}].to_json
   end
 
   post "/project/create" do |env|

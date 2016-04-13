@@ -177,11 +177,12 @@
               dataType: 'json',
               cache: false,
               success: function(data) {
-                // debugger;
-                this.setState({ projects: data });
+                setState({ projects: data });
               }.bind(this),
-              error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+              error: function(xhr, status) {
+                console.log("project/all error")
+                // setState({ projects: JSON.parse(xhr.responseText) });
+                // console.error(this.props.url, status, err.toString());
               }.bind(this)
             });
             // setInterval(this.loadProjectsFromServer, this.props.pollInterval);
@@ -230,11 +231,12 @@
               dataType: 'json',
               cache: false,
               success: function(data) {
-                setState({ projects: data });
+                setState({ projects: data, location: window.location.hash });
               },
               // .bind(this),
               error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                debugger;
+                // console.error(this.props.url, status, err.toString());
               }
               // .bind(this)
             });
@@ -300,6 +302,7 @@
             key: state.projects.length + 1,
             errors: {}
         });
+
         var json_project = JSON.stringify(project);
 
         $.ajax({
@@ -308,12 +311,12 @@
             type: 'POST',
             data: JSON.stringify(project),
             success: function(data) {
-                // this.setState({ newProject: project });
-            }, //.bind(this),
+                setState({ projects: [], newProject: project, location: window.location.hash });
+            }.bind(this),
             error: function(xhr, status, err) {
-                // console.error("/project/create", status, err.toString());
+                console.error("/project/create", status, err.toString());
                 // console.error(this.props.url, status, err.toString());
-            }//.bind(this)
+            }.bind(this)
         });
 
         if (!project.name) {
@@ -345,14 +348,6 @@
 
         Object.assign(state, changes);
 
-        // ReactDOM.render(
-        //     React.createElement(ProjectView, Object.assign({}, state, {
-        //         onNewProjectChange: updateNewProject,
-        //         onNewProjectSubmit: submitNewProject,
-        //     })),
-        //     document.getElementById('project-container')
-        // );
-
         switch (state.location) {
             case '#/all-projects':
                 component = React.createElement(ProjectView, Object.assign({}, state, {
@@ -360,13 +355,14 @@
                     onNewProjectSubmit: submitNewProject,
                 }));
                 ReactDOM.render(component, document.getElementById('project-container'));
+                break;
             case '#/team-projects':
                 component = React.createElement(TeamProjectView, Object.assign({}, state, {
                     onNewProjectChange: updateNewProject,
                     onNewProjectSubmit: submitNewProject,
                 }));
                 ReactDOM.render(component, document.getElementById('team-container'));
-            break;
+                break;
             default:
                 component = React.createElement('div', {},
                     React.createElement('h1', {}),

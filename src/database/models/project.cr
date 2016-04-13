@@ -25,6 +25,7 @@ class Project < Database::Connection
 
   def self.create(arg = {} of String => String)
     check = find_by(name: name)
+    arg = arg.reject("errors", "key")
 
     columns = arg.map{ |k, v| k }.join(", ")
     values = arg.map{ |k, v| "'#{v}'" }.join(", ")
