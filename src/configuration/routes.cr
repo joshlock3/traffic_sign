@@ -21,15 +21,15 @@ module Routes
 
   post "/project/create" do |env|
     params = env.params.json
-    Project.create(name: params["name"], due_date: params["due_date"], adjusted_due_date: params["adjusted_due_date"], team_id: params["team_id"], status_id: params["status_id"], completed: params["completed"])
+    Project.create(params)
 
     env.redirect "/"
   end
 
-  patch "/project/update" do |env|
+  post "/project/update" do |env|
     params = env.params.json
     puts "This is the current params: #{params}"
-    # Project.update(params["id"],params.reject("id"))
+    Project.update(params["id"],params.reject("id"))
     env.redirect "/"
   end
 

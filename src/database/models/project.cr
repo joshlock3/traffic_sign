@@ -23,16 +23,32 @@ class Project < Database::Connection
     end
   end
 
-  def self.update(id, arg = {} of String => String)
-    check = find_by(id: id)
-    values = arg.map{ |k, v| "#{k} = #{v}" }.join(", ")
+  def self.create(arg = {} of String => String)
+    check = find_by(name: name)
 
-    statement = UPDATE + MODEL + "SET #{values} WHERE id = #{id};"
+    columns = arg.map{ |k, v| k }.join(", ")
+    values = arg.map{ |k, v| "'#{v}'" }.join(", ")
+
+    statement = INSERT + MODEL + " (#{columns}) VALUES(#{values});"
 
     unless check.size > 0
       Database::Connection.connect(statement)
     else
-      puts NOT_FOUND
+      puts DUPLICATE
+    end
+  end
+
+  def self.update(id, arg = {} of String => String)
+    check = find_by(id: id)
+    values = arg.map{ |k, v| "#{k} = #{v}" }.join(", ")
+
+    statement = UPDATE + MODEL + " SET #{values} WHERE id = #{id};"
+
+    case check.size
+    when 0
+      p Database::Connection::NOT_FOUND
+    else
+      Database::Connection.connect(statement)
     end
   end
 
@@ -53,7 +69,7 @@ class Project < Database::Connection
     end
 
     statement = FIND + MODEL +  " WHERE #{where};"
-    puts "this is the statement: #{statement}"
+
     Database::Connection.connect(statement)
   end
 
