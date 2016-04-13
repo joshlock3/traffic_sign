@@ -123,24 +123,14 @@
                 React.createElement('li', {
                         className: 'ProjectItem'
                     },
-                    React.createElement('h2', {
+                    React.createElement('p', {
                         className: 'ProjectItem-name'
-                    }, this.props.name),
-                    React.createElement('h3', {
-                        className: 'ProjectItem-team-id'
-                    }, this.props.team_id),
-                    React.createElement('h3', {
-                        className: 'ProjectItem-due-date'
-                    }, this.props.due_date),
-                    React.createElement('h3', {
-                        className: 'ProjectItem-adjusted-due-date'
-                    }, this.props.adjusted_due_date),
-                    React.createElement('h3', {
-                        className: 'ProjectItem-status-id'
-                    }, this.props.status_id),
-                    React.createElement('h3', {
-                        className: 'ProjectItem-completed'
-                    }, this.props.completed)
+                    },  'Project: ', this.props.name,
+                        ' Team ID: ', this.props.team_id,
+                        ' Due Date: ', this.props.due_date,
+                        ' Adjusted Due Date: ', this.props.adjusted_due_date,
+                        ' Status: ', this.props.status_id,
+                        ' Completed: ', this.props.completed )
                 )
             );
         },
@@ -177,7 +167,7 @@
                 .map(function(project) {
                     return React.createElement(ProjectItem, project);
                 });
-            debugger;
+
             return (
                 React.createElement('div', {
                         className: 'ProjectView'
