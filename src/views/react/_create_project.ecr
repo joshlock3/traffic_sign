@@ -259,7 +259,7 @@
                     React.createElement('h1', {
                         className: 'TeamProjectView-title'
                     }, "Team Projects"),
-                    React.createElement('a', {href: '#/'}, "Back to All"),
+                    React.createElement('a', {href: '#/all-projects'}, "Back to All"),
                     React.createElement('ul', {
                         className: 'TeamProjectView-list'
                     }, projectItemElements),
@@ -361,16 +361,16 @@
                     onNewProjectChange: updateNewProject,
                     onNewProjectSubmit: submitNewProject,
                 }));
-                ReactDOM.render(component, document.getElementById('team-container'));
+                ReactDOM.render(component, document.getElementById('project-container'));
                 break;
             default:
-                component = React.createElement('div', {},
-                    React.createElement('h1', {}),
-                    React.createElement('a', {href: '#/team-projects'}, "Filter by Team"),
-                    React.createElement('br'),
-                    React.createElement('a', {href: '#/'}, "Back to All")
-                );
-                ReactDOM.render(component, document.getElementById('project-container'));
+                // component = React.createElement('div', {},
+                //     React.createElement('h1', {}),
+                //     React.createElement('a', {href: '#/team-projects'}, "Filter by Team"),
+                //     React.createElement('br'),
+                //     React.createElement('a', {href: '#/all-projects'}, "Back to All")
+                // );
+                // ReactDOM.render(component, document.getElementById('project-container'));
         }
         // ReactDOM.render(component, document.getElementById('project-container'));
     }
