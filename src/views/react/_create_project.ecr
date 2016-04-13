@@ -48,6 +48,23 @@
             this.props.onSubmit();
         },
 
+        // handleProjectSubmit: function(project) {
+        //     $.ajax({
+        //         // url: this.props.url,
+        //         url: "/project/create",
+        //         dataType: 'json',
+        //         type: 'POST',
+        //         data: project,
+        //         success: function(data) {
+        //             debugger;
+        //             this.setState({ newProject: project });
+        //         }.bind(this),
+        //         error: function(xhr, status, err) {
+        //             console.error(this.props.url, status, err.toString());
+        //         }.bind(this)
+        //     });
+        // },
+
         render: function() {
             var errors = this.props.value.errors || {};
 
@@ -111,10 +128,10 @@
     var ProjectItem = React.createClass({
         propTypes: {
             name: React.PropTypes.string.isRequired,
-            team_id: React.PropTypes.number.isRequired,
+            team_id: React.PropTypes.string.isRequired,
             due_date: React.PropTypes.string,
             adjusted_due_date: React.PropTypes.string,
-            status_id: React.PropTypes.number,
+            status_id: React.PropTypes.string,
             completed: React.PropTypes.string,
         },
 
@@ -154,6 +171,21 @@
             onNewProjectChange: React.PropTypes.func.isRequired,
             onNewProjectSubmit: React.PropTypes.func.isRequired,
         },
+        componentDidMount: function() {
+            $.ajax({
+              url: "/project/all",
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                // debugger;
+                this.setState({ projects: data });
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+            // setInterval(this.loadProjectsFromServer, this.props.pollInterval);
+        },
 
         render: function() {
             var projectItemElements = this.props.projects
@@ -191,6 +223,22 @@
             newProject: React.PropTypes.object.isRequired,
             onNewProjectChange: React.PropTypes.func.isRequired,
             onNewProjectSubmit: React.PropTypes.func.isRequired,
+        },
+        componentDidMount: function() {
+            $.ajax({
+              url: "/project/team",
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                debugger;
+                this.setState({ projects: data });
+              }.bind(this),
+              error: function(xhr, status, err) {
+                debugger;
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+            // setInterval(this.loadProjectsFromServer, this.props.pollInterval);
         },
 
         render: function() {
@@ -251,6 +299,23 @@
         var project = Object.assign({}, state.newProject, {
             key: state.projects.length + 1,
             errors: {}
+        });
+
+        $.ajax({
+            // url: this.props.url,
+            url: "/project/create",
+            dataType: 'json',
+            type: 'POST',
+            data: project,
+            success: function(data) {
+                debugger;
+                // this.setState({ newProject: project });
+            }, //.bind(this),
+            error: function(xhr, status, err) {
+                debugger;
+                // console.error("/project/create", status, err.toString());
+                // console.error(this.props.url, status, err.toString());
+            }//.bind(this)
         });
 
         if (!project.name) {
@@ -331,4 +396,5 @@
 
     // Start the app
     navigated();
+
 </script>

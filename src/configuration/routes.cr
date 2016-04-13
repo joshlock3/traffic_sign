@@ -7,6 +7,14 @@ module Routes
 
   ######   PROJECTS   ######
 
+  get "/project/all" do |env|
+    Project.all.to_hash
+  end
+
+  get "/project/team" do |env|
+    Project.all.to_hash
+  end
+
   post "/project/create" do |env|
     params = env.params
     # perform some action with the params and redirect back to root
