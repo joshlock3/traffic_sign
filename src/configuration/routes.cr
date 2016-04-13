@@ -12,15 +12,26 @@ module Routes
   ######   PROJECTS   ######
 
   get "/project/all" do |env|
-    Project.all.to_hash
+    Project.all
   end
 
   get "/project/team" do |env|
-    Project.all.to_hash
+    Project.all
   end
 
   post "/project/create" do |env|
     params = env.params.json
+    p "*" * 80
+    p "*" * 80
+    p "*" * 80
+    p "params #{params}"
+    p "*" * 80
+    p "*" * 80
+    p "*" * 80
+    p "*" * 80
+    p "*" * 80
+    p "*" * 80
+    p "env.params #{env.params}"
     Project.create(name: params["name"], due_date: params["due_date"], adjusted_due_date: params["adjusted_due_date"], team_id: params["team_id"], status_id: params["status_id"], completed: params["completed"])
 
     env.redirect "/"
