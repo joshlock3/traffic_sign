@@ -231,14 +231,13 @@
               dataType: 'json',
               cache: false,
               success: function(data) {
+                debugger;
                 setState({ projects: data, location: window.location.hash });
-              },
-              // .bind(this),
+              }.bind(this),
               error: function(xhr, status, err) {
                 debugger;
                 // console.error(this.props.url, status, err.toString());
-              }
-              // .bind(this)
+              }.bind(this)
             });
             // setInterval(this.loadProjectsFromServer, this.props.pollInterval);
         },
@@ -311,11 +310,10 @@
             type: 'POST',
             data: JSON.stringify(project),
             success: function(data) {
-                setState({ projects: [], newProject: project, location: window.location.hash });
+                setState({ newProject: project, location: window.location.hash });
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error("/project/create", status, err.toString());
-                // console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
 
