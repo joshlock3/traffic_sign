@@ -171,8 +171,47 @@
                     React.createElement('h1', {
                         className: 'ProjectView-title'
                     }, "Projects"),
+                    React.createElement('a', {href: '#/team-projects'}, "Filter by Team"),
                     React.createElement('ul', {
                         className: 'ProjectView-list'
+                    }, projectItemElements),
+                    React.createElement(ProjectForm, {
+                        value: this.props.newProject,
+                        onChange: this.props.onNewProjectChange,
+                        onSubmit: this.props.onNewProjectSubmit,
+                    })
+                )
+            );
+        },
+    });
+
+    var TeamProjectView = React.createClass({
+        propTypes: {
+            projects: React.PropTypes.array.isRequired,
+            newProject: React.PropTypes.object.isRequired,
+            onNewProjectChange: React.PropTypes.func.isRequired,
+            onNewProjectSubmit: React.PropTypes.func.isRequired,
+        },
+
+        render: function() {
+            var projectItemElements = this.props.projects
+                .filter(function(project) {
+                    return project.name;
+                })
+                .map(function(project) {
+                    return React.createElement(ProjectItem, project);
+                });
+
+            return (
+                React.createElement('div', {
+                        className: 'TeamProjectView'
+                    },
+                    React.createElement('h1', {
+                        className: 'TeamProjectView-title'
+                    }, "Team Projects"),
+                    React.createElement('a', {href: '#/'}, "Back to All"),
+                    React.createElement('ul', {
+                        className: 'TeamProjectView-list'
                     }, projectItemElements),
                     React.createElement(ProjectForm, {
                         value: this.props.newProject,
@@ -239,15 +278,42 @@
 
     // Make the given changes to the state and perform any required housekeeping
     function setState(changes) {
+        var component;
+
         Object.assign(state, changes);
 
-        ReactDOM.render(
-            React.createElement(ProjectView, Object.assign({}, state, {
-                onNewProjectChange: updateNewProject,
-                onNewProjectSubmit: submitNewProject,
-            })),
-            document.getElementById('project-container')
-        );
+        // ReactDOM.render(
+        //     React.createElement(ProjectView, Object.assign({}, state, {
+        //         onNewProjectChange: updateNewProject,
+        //         onNewProjectSubmit: submitNewProject,
+        //     })),
+        //     document.getElementById('project-container')
+        // );
+
+        switch (state.location) {
+            case '#/all-projects':
+                component = React.createElement(ProjectView, Object.assign({}, state, {
+                    onNewProjectChange: updateNewProject,
+                    onNewProjectSubmit: submitNewProject,
+                }));
+                ReactDOM.render(component, document.getElementById('project-container'));
+            case '#/team-projects':
+                component = React.createElement(TeamProjectView, Object.assign({}, state, {
+                    onNewProjectChange: updateNewProject,
+                    onNewProjectSubmit: submitNewProject,
+                }));
+                ReactDOM.render(component, document.getElementById('team-container'));
+            break;
+            default:
+                component = React.createElement('div', {},
+                    React.createElement('h1', {}),
+                    React.createElement('a', {href: '#/team-projects'}, "Filter by Team"),
+                    React.createElement('br'),
+                    React.createElement('a', {href: '#/'}, "Back to All")
+                );
+                ReactDOM.render(component, document.getElementById('project-container'));
+        }
+        // ReactDOM.render(component, document.getElementById('project-container'));
     }
 
     // Set initial data
@@ -255,4 +321,14 @@
         projects: [],
         newProject: Object.assign({}, PROJECT_TEMPLATE),
     });
+
+    function navigated() {
+        setState({location: window.location.hash});
+    }
+
+    // Handle browser navigation events
+    window.addEventListener('hashchange', navigated, false);
+
+    // Start the app
+    navigated();
 </script>

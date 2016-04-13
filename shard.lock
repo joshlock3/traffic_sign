@@ -2,7 +2,7 @@ version: 1.0
 shards:
   kemal:
     github: sdogruyol/kemal
-    commit: 65d0af5b5f953c9c263d0e4c657517c4d64567ce
+    commit: 3b4440d358c47f9f9b935cc8249674f9e795a100
 
   kemal-pg:
     github: sdogruyol/kemal-pg
@@ -26,5 +26,5 @@ shards:
 
   sqlite3:
     github: manastech/crystal-sqlite3
-    version: 0.2.0
+    version: 0.3.0
 
