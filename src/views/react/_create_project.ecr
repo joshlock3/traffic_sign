@@ -48,23 +48,6 @@
             this.props.onSubmit();
         },
 
-        // handleProjectSubmit: function(project) {
-        //     $.ajax({
-        //         // url: this.props.url,
-        //         url: "/project/create",
-        //         dataType: 'json',
-        //         type: 'POST',
-        //         data: project,
-        //         success: function(data) {
-        //             debugger;
-        //             this.setState({ newProject: project });
-        //         }.bind(this),
-        //         error: function(xhr, status, err) {
-        //             console.error(this.props.url, status, err.toString());
-        //         }.bind(this)
-        //     });
-        // },
-
         render: function() {
             var errors = this.props.value.errors || {};
 
@@ -179,13 +162,11 @@
               success: function(data) {
                 setState({ projects: data });
               }.bind(this),
-              error: function(xhr, status) {
-                console.log("project/all error")
-                // setState({ projects: JSON.parse(xhr.responseText) });
-                // console.error(this.props.url, status, err.toString());
+              error: function(xhr, status, err) {
+                console.error("/project/all", status, err.toString());
               }.bind(this)
             });
-            // setInterval(this.loadProjectsFromServer, this.props.pollInterval);
+            setInterval(this.loadProjectsFromServer, this.props.pollInterval);
         },
 
         render: function() {
@@ -196,7 +177,7 @@
                 .map(function(project) {
                     return React.createElement(ProjectItem, project);
                 });
-
+            debugger;
             return (
                 React.createElement('div', {
                         className: 'ProjectView'
@@ -231,15 +212,13 @@
               dataType: 'json',
               cache: false,
               success: function(data) {
-                debugger;
-                setState({ projects: data, location: window.location.hash });
+                setState({ projects: data });
               }.bind(this),
               error: function(xhr, status, err) {
-                debugger;
-                // console.error(this.props.url, status, err.toString());
+                console.error("/project/team", status, err.toString());
               }.bind(this)
             });
-            // setInterval(this.loadProjectsFromServer, this.props.pollInterval);
+            setInterval(this.loadProjectsFromServer, this.props.pollInterval);
         },
 
         render: function() {
@@ -352,25 +331,22 @@
                     onNewProjectChange: updateNewProject,
                     onNewProjectSubmit: submitNewProject,
                 }));
-                ReactDOM.render(component, document.getElementById('project-container'));
                 break;
             case '#/team-projects':
                 component = React.createElement(TeamProjectView, Object.assign({}, state, {
                     onNewProjectChange: updateNewProject,
                     onNewProjectSubmit: submitNewProject,
                 }));
-                ReactDOM.render(component, document.getElementById('project-container'));
                 break;
             default:
-                // component = React.createElement('div', {},
-                //     React.createElement('h1', {}),
-                //     React.createElement('a', {href: '#/team-projects'}, "Filter by Team"),
-                //     React.createElement('br'),
-                //     React.createElement('a', {href: '#/all-projects'}, "Back to All")
-                // );
-                // ReactDOM.render(component, document.getElementById('project-container'));
+                component = React.createElement('div', {},
+                    React.createElement('h1', {}),
+                    React.createElement('a', {href: '#/team-projects'}, "Filter by Team"),
+                    React.createElement('br'),
+                    React.createElement('a', {href: '#/all-projects'}, "Back to All")
+                );
         }
-        // ReactDOM.render(component, document.getElementById('project-container'));
+        ReactDOM.render(component, document.getElementById('project-container'));
     }
 
     // Set initial data
