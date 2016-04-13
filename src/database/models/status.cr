@@ -2,12 +2,10 @@ require "../connection.cr"
 
 class Status < Database::Connection
   MODEL = "statuses"
-  TYPE_TUPLE = {Int32, String}
 
   def self.create_table
-    type_tuple =  { Int32, String }
     statement = "CREATE TABLE statuses (id SERIAL PRIMARY KEY, name varchar(50));"
-    Database::Connection.connect(type_tuple, statement)
+    Database::Connection.connect(statement)
   end
 
   def self.create
@@ -20,11 +18,11 @@ class Status < Database::Connection
   end
 
   def self.all
-    Database::Connection.connect(TYPE_TUPLE, FIND + MODEL)
+    Database::Connection.connect(FIND + MODEL)
   end
 
   def self.query(where)
-    Database::Connection.connect(TYPE_TUPLE, FIND + MODEL + " WHERE #{where};")
+    Database::Connection.connect(FIND + MODEL + " WHERE #{where};")
   end
 
   def self.find_by(name = "", id = 0)
@@ -35,7 +33,7 @@ class Status < Database::Connection
       "name = #{name}"
     end
     statement = FIND + MODEL +  " WHERE #{where};"
-    Database::Connection.connect(TYPE_TUPLE, statement)
+    Database::Connection.connect(statement)
   end
 
   def self.destroy(name = "", id = 0)
@@ -46,6 +44,6 @@ class Status < Database::Connection
       "name = #{name}"
     end
     statement = DESTROY + MODEL +  " WHERE #{where};"
-    Database::Connection.connect(TYPE_TUPLE, statement)
+    Database::Connection.connect(statement)
   end
 end
