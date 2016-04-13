@@ -225,7 +225,6 @@
             onNewProjectSubmit: React.PropTypes.func.isRequired,
         },
         componentDidMount: function() {
-            debugger;
             $.ajax({
               url: "/project/team",
               dataType: 'json',
@@ -301,18 +300,17 @@
             key: state.projects.length + 1,
             errors: {}
         });
-        debugger;
+        var json_project = JSON.stringify(project);
+
         $.ajax({
             url: "/project/create",
-            dataType: 'json',
+            contentType: "application/json",
             type: 'POST',
-            data: project,
+            data: JSON.stringify(project),
             success: function(data) {
-                debugger;
                 // this.setState({ newProject: project });
             }, //.bind(this),
             error: function(xhr, status, err) {
-                debugger;
                 // console.error("/project/create", status, err.toString());
                 // console.error(this.props.url, status, err.toString());
             }//.bind(this)
